@@ -16,12 +16,21 @@ function App() {
   const authString = md5(`${password}_${timestamp}`).toString();
 
   function findItemsByParam(e) {
+    e.preventDefault();
+    let numericValue = parseFloat(searchingText);
+    let dataparam = "";
+
+    if (!isNaN(numericValue)) {
+      dataparam = numericValue;
+    } else {
+      dataparam = searchingText;
+    }
+
     let requestSearchItem = {
       action: "filter",
-      params: { [param]: searchingText },
+      params: { [param]: dataparam },
     };
 
-    e.preventDefault();
     fetch(url, {
       method: "POST",
       headers: {
@@ -153,7 +162,10 @@ function App() {
         <span className="prev" onClick={() => setOffsetItems((x) => (x !== 0 ? x - 1 : x))}>
           &#60;&#60; prev
         </span>
-        <span className="next" onClick={() => setOffsetItems((x) => x + 1)}>
+        <span
+          className="next"
+          onClick={() => setOffsetItems((x) => (items.length == 50 ? x + 1 : x))}
+        >
           next &#62;&#62;
         </span>
       </div>

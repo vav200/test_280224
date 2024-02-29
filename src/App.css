@@ -1,6 +1,6 @@
 .items {
   margin: 20px auto;
-  width: 60%;
+  width: 80%;
   padding-left: 0;
 }
 .zagl {
@@ -50,7 +50,7 @@
   padding-left: 10px;
 }
 .searchBlock {
-  width: 60%;
+  width: 80%;
   margin: 20px auto;
 }
 .searchBlock__form {
