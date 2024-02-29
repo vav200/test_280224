@@ -4,7 +4,8 @@ import md5 from "crypto-js/md5";
 import { format } from "date-fns";
 
 function App() {
-  const [base, setBase] = useState();
+  const [masids, setMasIds] = useState([]);
+  const [items, setItems] = useState([]);
 
   const url = "https://api.valantis.store:41000/";
   const password = "Valantis";
@@ -15,19 +16,24 @@ function App() {
   console.log(timestamp);
   console.log(authString);
 
-  let request = {
+  let requestIds = {
     action: "get_ids",
     params: { offset: 10, limit: 3 },
   };
 
-  function get() {
+  let requestItems = {
+    action: "get_items",
+    params: { ids: masids },
+  };
+
+  function getData() {
     fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-Auth": authString,
       },
-      body: JSON.stringify(request),
+      body: JSON.stringify(requestIds),
     })
       .then((dat) => {
         if (!dat.ok) {
@@ -37,7 +43,22 @@ function App() {
       })
       .then((dat) => {
         console.log(dat);
-        setBase(dat);
+        setMasIds(dat.result);
+        if (masids) {
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Auth": authString,
+            },
+            body: JSON.stringify(requestItems),
+          })
+            .then((dat) => dat.json())
+            .then((dat) => {
+              console.log(dat);
+              setItems(dat.result);
+            });
+        }
       })
       .catch((error) => {
         console.error("Ошибка запроса:", error.message);
@@ -45,8 +66,9 @@ function App() {
   }
 
   useEffect(() => {
-    get();
+    getData();
   }, []);
+
   return (
     <div>
       <ul>
