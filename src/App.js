@@ -101,9 +101,9 @@ function App() {
       });
   }
 
-  // useEffect(() => {
-  //   getData();
-  // }, [offsetItems]);
+  useEffect(() => {
+    getData();
+  }, [offsetItems]);
 
   return (
     <div>
@@ -139,18 +139,6 @@ function App() {
           <div className="box name">Название</div>
           <div className="box price">Цена</div>
           <div className="box brend">Бренд</div>
-        </li>
-        <li className="str">
-          <div className="box id">55566</div>
-          <div className="box name">Кольцо</div>
-          <div className="box price">5000</div>
-          <div className="box brend">Grasia</div>
-        </li>
-        <li className="str">
-          <div className="box id">81566</div>
-          <div className="box name">Подвеска</div>
-          <div className="box price">3200</div>
-          <div className="box brend">Jerdano</div>
         </li>
         {items.map((el) => (
           <li className="str">
