@@ -1,22 +1,68 @@
+.items {
+  margin: 20px auto;
+  width: 60%;
+  padding-left: 0;
+}
 .zagl {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+.zagl .box {
   background-color: rgb(228, 228, 228);
 }
 .str {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  margin-bottom: 5px;
 }
 .box {
   border: solid 1px gray;
-  padding: 5px 10px;
+  padding: 7px 10px;
   flex: 1;
   text-align: center;
+  margin-right: 5px;
+}
+.box:last-child {
+  margin-right: 0;
 }
 .prev,
 .next {
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: gray;
+  transition: color 0.2s linear;
+}
+.prev:hover,
+.next:hover {
+  color: black;
+}
+.pagin {
+  text-align: center;
+}
+.prev {
+  padding-right: 10px;
+}
+.next {
+  padding-left: 10px;
+}
+.searchBlock {
+  width: 60%;
+  margin: 20px auto;
+}
+.searchBlock__form {
+  display: flex;
+  flex-direction: row;
+}
+.searchBlock__inp {
+  flex: 1;
+  outline: none;
+  border-right: none;
+  border-left: none;
+}
+.searchBlock__item {
+  padding: 5px 10px;
 }
