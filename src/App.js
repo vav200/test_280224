@@ -43,7 +43,6 @@ function App() {
       })
         .then((dat) => dat.json())
         .then((dat) => {
-          console.log(dat);
           let requestItems = {
             action: "get_items",
             params: { ids: dat.result },
@@ -59,7 +58,6 @@ function App() {
           })
             .then((dat) => dat.json())
             .then((dat) => {
-              console.log(dat);
               setItems(dat.result);
             });
         });
@@ -86,8 +84,6 @@ function App() {
         return dat.json();
       })
       .then((dat) => {
-        console.log(dat);
-
         let requestItems = {
           action: "get_items",
           params: { ids: dat.result },
@@ -103,7 +99,6 @@ function App() {
         })
           .then((dat) => dat.json())
           .then((dat) => {
-            console.log(dat);
             setItems(dat.result);
           });
       })
@@ -146,7 +141,7 @@ function App() {
       </div>
       <ul className="items">
         <li className="zagl">
-          <div className="box id">№</div>
+          <div className="box id">ID</div>
           <div className="box name">Название</div>
           <div className="box price">Цена</div>
           <div className="box brend">Бренд</div>
