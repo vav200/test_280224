@@ -13,8 +13,8 @@ function App() {
   const timestamp = format(dateNow, "yyyyMMdd");
   const authString = md5(`${password}_${timestamp}`).toString();
 
-  console.log(timestamp);
-  console.log(authString);
+  // console.log(timestamp);
+  // console.log(authString);
 
   let requestIds = {
     action: "get_ids",
@@ -25,6 +25,8 @@ function App() {
     action: "get_items",
     params: { ids: masids },
   };
+
+  console.log(masids);
 
   function getData() {
     fetch(url, {
