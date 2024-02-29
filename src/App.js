@@ -17,58 +17,60 @@ function App() {
 
   function findItemsByParam(e) {
     e.preventDefault();
-    let numericValue = parseFloat(searchingText);
-    let dataparam = "";
 
-    if (!isNaN(numericValue)) {
-      dataparam = numericValue;
-    } else {
-      dataparam = searchingText;
+    if (searchingText) {
+      let numericValue = parseFloat(searchingText);
+      let dataparam = "";
+
+      if (!isNaN(numericValue)) {
+        dataparam = numericValue;
+      } else {
+        dataparam = searchingText;
+      }
+
+      let requestSearchItem = {
+        action: "filter",
+        params: { [param]: dataparam },
+      };
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Auth": authString,
+        },
+        body: JSON.stringify(requestSearchItem),
+      })
+        .then((dat) => dat.json())
+        .then((dat) => {
+          console.log(dat);
+          let requestItems = {
+            action: "get_items",
+            params: { ids: dat.result },
+          };
+
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Auth": authString,
+            },
+            body: JSON.stringify(requestItems),
+          })
+            .then((dat) => dat.json())
+            .then((dat) => {
+              console.log(dat);
+              setItems(dat.result);
+            });
+        });
     }
-
-    let requestSearchItem = {
-      action: "filter",
-      params: { [param]: dataparam },
-    };
-
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Auth": authString,
-      },
-      body: JSON.stringify(requestSearchItem),
-    })
-      .then((dat) => dat.json())
-      .then((dat) => {
-        console.log(dat);
-        let requestItems = {
-          action: "get_items",
-          params: { ids: dat.result },
-        };
-
-        fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Auth": authString,
-          },
-          body: JSON.stringify(requestItems),
-        })
-          .then((dat) => dat.json())
-          .then((dat) => {
-            console.log(dat);
-            setItems(dat.result);
-          });
-      });
   }
 
-  let requestIds = {
-    action: "get_ids",
-    params: { offset: offsetItems, limit: 50 },
-  };
-
   function getData() {
+    let requestIds = {
+      action: "get_ids",
+      params: { offset: offsetItems, limit: 50 },
+    };
     fetch(url, {
       method: "POST",
       headers: {
@@ -158,7 +160,7 @@ function App() {
           </li>
         ))}
       </ul>
-      <div className="pagin">
+      <div className={`pagin ${setSearchingText ? "" : "pagin__hide"}`}>
         <span className="prev" onClick={() => setOffsetItems((x) => (x !== 0 ? x - 1 : x))}>
           &#60;&#60; prev
         </span>

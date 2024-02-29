@@ -41,7 +41,11 @@
   color: black;
 }
 .pagin {
+  display: block;
   text-align: center;
+}
+.pagin__hide {
+  display: none;
 }
 .prev {
   padding-right: 10px;
