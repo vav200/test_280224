@@ -158,13 +158,13 @@ function App() {
         ))}
       </ul>
       <div className={`pagin ${!searchingText ? "" : "pagin__hide"}`}>
-        <span className="prev" onClick={() => setOffsetItems((x) => (x !== 0 ? x - 1 : x))}>
+        <span className="prev" onClick={() => setOffsetItems((x) => (x !== 0 ? x - 50 : x))}>
           &#60;&#60; prev
         </span>
         <span
           className="next"
           onClick={() => {
-            setOffsetItems((x) => x + 1);
+            setOffsetItems((x) => (items.length < 50 ? x : x + 50));
             console.log(items.length);
           }}
         >
