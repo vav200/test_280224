@@ -160,7 +160,7 @@ function App() {
           </li>
         ))}
       </ul>
-      <div className={`pagin ${searchingText ? "" : "pagin__hide"}`}>
+      <div className={`pagin ${!searchingText ? "" : "pagin__hide"}`}>
         <span className="prev" onClick={() => setOffsetItems((x) => (x !== 0 ? x - 1 : x))}>
           &#60;&#60; prev
         </span>
