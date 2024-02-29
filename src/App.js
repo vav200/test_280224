@@ -84,6 +84,7 @@ function App() {
         return dat.json();
       })
       .then((dat) => {
+        console.log(dat);
         let requestItems = {
           action: "get_items",
           params: { ids: dat.result },
@@ -99,6 +100,7 @@ function App() {
         })
           .then((dat) => dat.json())
           .then((dat) => {
+            console.log(dat);
             setItems(dat.result);
           });
       })
@@ -162,7 +164,7 @@ function App() {
         <span
           className="next"
           onClick={() => {
-            setOffsetItems((x) => (items.length == 50 ? x + 1 : x));
+            setOffsetItems((x) => x + 1);
             console.log(items.length);
           }}
         >
