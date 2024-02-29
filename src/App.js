@@ -84,7 +84,6 @@ function App() {
         return dat.json();
       })
       .then((dat) => {
-        console.log(dat);
         let requestItems = {
           action: "get_items",
           params: { ids: dat.result },
@@ -100,7 +99,6 @@ function App() {
         })
           .then((dat) => dat.json())
           .then((dat) => {
-            console.log(dat);
             setItems(dat.result);
           });
       })
@@ -161,11 +159,11 @@ function App() {
         <span className="prev" onClick={() => setOffsetItems((x) => (x !== 0 ? x - 50 : x))}>
           &#60;&#60; prev
         </span>
+        <span>page {Math.floor(offsetItems / 50) + 1}</span>
         <span
           className="next"
           onClick={() => {
             setOffsetItems((x) => (items.length < 50 ? x : x + 50));
-            console.log(items.length);
           }}
         >
           next &#62;&#62;
