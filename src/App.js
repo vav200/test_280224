@@ -6,7 +6,7 @@ import { format } from "date-fns";
 function App() {
   const [base, setBase] = useState();
 
-  const url = "http://api.valantis.store:40000/";
+  const url = "https://api.valantis.store:40000/";
   const password = "Valantis";
   const dateNow = Date.now();
   const timestamp = format(dateNow, "yyyyMMdd");
