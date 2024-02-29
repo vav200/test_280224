@@ -6,6 +6,7 @@ import { format } from "date-fns";
 function App() {
   // const [masids, setMasIds] = useState([]);
   const [items, setItems] = useState([]);
+  const [offsetItems, setOffsetItems] = useState(0);
 
   const url = "https://api.valantis.store:41000/";
   const password = "Valantis";
@@ -13,12 +14,9 @@ function App() {
   const timestamp = format(dateNow, "yyyyMMdd");
   const authString = md5(`${password}_${timestamp}`).toString();
 
-  // console.log(timestamp);
-  // console.log(authString);
-
   let requestIds = {
     action: "get_ids",
-    params: { offset: 10, limit: 3 },
+    params: { offset: offsetItems, limit: 50 },
   };
 
   function getData() {
@@ -38,7 +36,6 @@ function App() {
       })
       .then((dat) => {
         console.log(dat);
-        // setMasIds(dat.result);
 
         let requestItems = {
           action: "get_items",
@@ -66,7 +63,7 @@ function App() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [offsetItems]);
 
   return (
     <div>
@@ -78,7 +75,7 @@ function App() {
           <div className="box brend">Бренд</div>
         </li>
         {items.map((el) => (
-          <li className="zagl">
+          <li className="str">
             <div className="box id">{el.id}</div>
             <div className="box name">{el.product}</div>
             <div className="box price">{el.price}</div>
@@ -86,6 +83,15 @@ function App() {
           </li>
         ))}
       </ul>
+      <div className="pagin">
+        <span className="prev" onClick={() => setOffsetItems((x) => (x !== 0 ? x - 1 : x))}>
+          prev
+        </span>
+        <span>&#60;&#60;|&#62;&#62;</span>
+        <span className="next" onClick={() => setOffsetItems((x) => x + 1)}>
+          next
+        </span>
+      </div>
     </div>
   );
 }
