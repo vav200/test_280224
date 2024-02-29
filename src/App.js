@@ -161,7 +161,10 @@ function App() {
         </span>
         <span
           className="next"
-          onClick={() => setOffsetItems((x) => (items.length == 50 ? x + 1 : x))}
+          onClick={() => {
+            setOffsetItems((x) => (items.length == 50 ? x + 1 : x));
+            console.log(items.length);
+          }}
         >
           next &#62;&#62;
         </span>
