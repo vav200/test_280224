@@ -77,6 +77,14 @@ function App() {
           <div className="box price">Цена</div>
           <div className="box brend">Бренд</div>
         </li>
+        {items.map((el) => (
+          <li className="zagl">
+            <div className="box id">{el.id}</div>
+            <div className="box name">{el.product}</div>
+            <div className="box price">{el.price}</div>
+            <div className="box brend">{el.brand}</div>
+          </li>
+        ))}
       </ul>
     </div>
   );
